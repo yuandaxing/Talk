@@ -106,5 +106,25 @@ inline void BinaryIntersect(const vector<int>& small, const vector<int>& large, 
     i = occur + 1;
   }
 }
+void NormalIntersect(vector<int>& vec1, vector<int>& vec2, vector<int>& result)
+{
+  for (vector<int>::iterator it1 = vec1.begin(), it2 = vec2.begin();
+       it1 != vec1.end() && it2 != vec2.end();)
+  {
+    if (*it1 < *it2)
+    {
+      ++it1;
+    } else if (*it1 > *it2)
+    {
+      ++it2;
+    } else
+    {
+      result.push_back(*it1);
+      ++it1;
+      ++it2;
+    }
+  }
+}
+
 
 #endif // DEMO_COMMON_H_
