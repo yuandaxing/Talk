@@ -5,7 +5,7 @@ MAKE	= make
 MAKEDIR = mkdir -p
 COPY	= cp
 AR		= ar
-CPPFLAGS = -O3
+CPPFLAGS = -O3 -std=c++11
 RELEASE = exe 
 
 DIRS := ./
@@ -18,7 +18,7 @@ EXE_CPP = $(patsubst %.cpp, %.exe, $(SOURCE_FILES_CPP))
 
 INCLUDE_DIR = ../include
 LIB_DIR =
-LIB_NAME =
+LIB_NAME = pthread
 
 OBJECT = $(OBJECT_CPP) $(OBJECT_CC)
 LINK_LIB = $(addprefix -l, $(LIB_NAME))
@@ -32,7 +32,7 @@ INCLUDE_PATH = $(addprefix -I,$(INCLUDE_DIR))
 	$(CXX) $(CPPFLAGS) $(INCLUDE_PATH) -c $< -o $@
 
 %.exe : %.cpp
-	$(CXX) $(CPPFLAGS) $(INCLUDE_PATH) $< -o $@
+	$(CXX) $(CPPFLAGS) $(INCLUDE_PATH) $< -o $@ $(LINK_PATH) $(LINK_LIB)
 
 all:  $(EXE_CPP)
 

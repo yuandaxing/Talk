@@ -126,5 +126,4 @@ void NormalIntersect(vector<int>& vec1, vector<int>& vec2, vector<int>& result)
   }
 }
 
-
 #endif // DEMO_COMMON_H_
