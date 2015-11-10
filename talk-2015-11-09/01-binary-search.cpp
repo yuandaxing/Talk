@@ -1,4 +1,5 @@
 #include "common.h"
+
 int main(int argc, char *argv[])
 {
   int max_int = 100000, iterate_times = 100;
