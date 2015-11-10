@@ -1,0 +1,38 @@
+int32_t topk_station = 0;
+int32_t topk_size = 20, rand_end = 30;
+int32_t size = candidates_.size();
+for (int32_t i = 0; (i < size) && (result.size() < rand_end); ++i)
+{
+  if (state_ == TOPK)
+  {
+     if (result.size() >= topk_size)
+     {
+        state_ = RANDOM;
+     }
+     else if (i >= topk_station)
+     {
+        topk_station = i + 100;
+        if (topk_station < size)
+        {
+          nth_element(candidates_.begin() + i, candidates_.begin() + topk_station, candidates_.end(), ScoredBanner::GT);
+           sort(candidates_.begin() + i, candidates_.begin() + topk_station, ScoredBanner::GT);
+         }
+         else
+         {
+            topk_station = size;
+            sort(candidates_.begin() + i, candidates_.begin() + topk_station, ScoredBanner::GT);
+          }
+        }
+     }
+
+   if (state_ == RANDOM)
+   {
+      swap(candidates_[i], candidates_[rand_.Next() % (size - i) + i]);
+   }
+
+   const AdFullInfo* full_info = candidates_[i].ad_full_info;
+   if (!FilterByProperties(isearch_info, full_info))
+   {
+      result.push_back(full_info);
+   }
+}

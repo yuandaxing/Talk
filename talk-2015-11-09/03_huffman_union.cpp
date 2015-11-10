@@ -74,12 +74,13 @@ void HuffmanUnion(list<vector<int>* >& lists, vector<int>& result)
 
   while (lists.size() > 2ul)
   {
-    vector<int> cur;
     vector<int>* p1 = pop_front(lists), *p2 = pop_front(lists);
+    vector<int> cur;
+    cur.reserve(p1->size() + p2->size());
     Union(*p1, *p2, cur);
-    Insert(StoreTemp(cur, tmp), lists);
+    //Insert(StoreTemp(cur, tmp), lists);
+    lists.push_back(StoreTemp(cur, tmp));
   }
-
   if (lists.size() == 2ul)
   {
     vector<int>* p1 = pop_front(lists), *p2 = pop_front(lists);
@@ -132,22 +133,7 @@ int main(int argc, char *argv[])
     list_vector.push_back(tmp1);
   }
   int try_times = 100, result_size = 0;
-  int64_t beg = CurrentUSeconds();
-  for (int i = 0; i != try_times; i++)
-  {
-    list<vector<int>*> lists;
-    for (list<vector<int> >::iterator it = list_vector.begin(); it != list_vector.end(); ++it)
-    {
-      lists.push_back(&(*it));
-    }
-    vector<int> result;
-    Union(lists, result);
-    result_size += result.size();
-  }
-  int64_t c2 = CurrentUSeconds() - beg;
-  cout << "result_size: " << result_size << std::endl;
-  cout << "cost: " << c2 << std::endl;
-
+  int64_t beg = 0;
   result_size = 0;
   beg = CurrentUSeconds();
   for (int i = 0; i != try_times; i++)
@@ -159,13 +145,29 @@ int main(int argc, char *argv[])
     }
     vector<int> result;
     HuffmanUnion(lists, result);
-    result_size += result.size();
+    result_size += result.size() + i;
   }
   int64_t c1 = CurrentUSeconds() - beg;
   cout << "result_size: " << result_size << std::endl;
   cout << "cost: " << c1 << std::endl;
 
-  cout << "ratio : " << c1 * 1.0 / c2 << std::endl;
 
+  beg = CurrentUSeconds();
+  for (int i = 0; i != try_times; i++)
+  {
+    list<vector<int>*> lists;
+    for (list<vector<int> >::iterator it = list_vector.begin(); it != list_vector.end(); ++it)
+    {
+      lists.push_back(&(*it));
+    }
+    vector<int> result;
+    Union(lists, result);
+    result_size += result.size() + i;
+  }
+  int64_t c2 = CurrentUSeconds() - beg;
+  cout << "result_size: " << result_size << std::endl;
+  cout << "cost: " << c2 << std::endl;
+
+  cout << "ratio : " << c1 * 1.0 / c2 << std::endl;
   return 0;
 }
