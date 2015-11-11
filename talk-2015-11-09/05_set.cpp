@@ -40,10 +40,6 @@ int find_set(set<int64_t>& s, vector<int64_t>& result)
 void GenerateRandom(vector<int64_t>& vi, int size, int maxV)
 {
   set<int64_t> s;
-  // while(s.size() != size)
-  // {
-  //   s.insert(rand() % maxV);
-  // }
   for(int i = 0; i != size; i++)
   {
     s.insert(i);
