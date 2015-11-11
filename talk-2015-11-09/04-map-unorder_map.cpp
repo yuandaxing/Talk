@@ -44,6 +44,8 @@ int main(int argc, char *argv[])
   int count = 0;
   int64_t beg = 0;
 
+  cout << "unordered map size:" << unmap.size() << std::endl;
+  cout << "map size:" << non_unmap.size() << std::endl;
   beg = CurrentUSeconds();
   for (vector<int>::iterator it = query.begin(); it != query.end(); ++it)
   {
