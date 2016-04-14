@@ -59,14 +59,14 @@ int main()
                         { return p.key_ < v; });
   if (it != vec.end())
   {
-    cout << it->key_;
+    cout << it->key_ << endl;
   }
 
   auto it1 = upper_bound(vec.begin(), vec.end(), 6, [](int v, const Pair& p)
                         { return v < p.key_; });
   if (it1 != vec.end())
   {
-    cout << it1->key_;
+    cout << it1->key_ << endl;
   }
 
   return 0;
