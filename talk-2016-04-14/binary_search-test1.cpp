@@ -55,5 +55,19 @@ int main()
                                return p0.key_ < p1.key_;
                              });
   cout << found << endl;
+  auto it = lower_bound(vec.begin(), vec.end(), 6, [](const Pair& p, int v)
+                        { return p.key_ < v; });
+  if (it != vec.end())
+  {
+    cout << it->key_;
+  }
+
+  auto it1 = upper_bound(vec.begin(), vec.end(), 6, [](int v, const Pair& p)
+                        { return v < p.key_; });
+  if (it1 != vec.end())
+  {
+    cout << it1->key_;
+  }
+
   return 0;
 }
